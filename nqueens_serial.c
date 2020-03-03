@@ -4,7 +4,7 @@
 #include <string.h>
 #include <omp.h>
 
-#define N 8
+#define N 12
 bool SOLUTION_EXISTS = false;
 
 bool can_be_placed(int board[N][N], int row, int col);
