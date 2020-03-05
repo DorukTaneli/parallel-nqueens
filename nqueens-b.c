@@ -5,7 +5,7 @@
 #include <omp.h>
 
 #define N 12
-#define MAX_LEVELS 10
+#define MAX_LEVELS 20
 bool SOLUTION_EXISTS = false;
 
 bool can_be_placed(int board[N][N], int row, int col);
@@ -56,14 +56,15 @@ bool solve_NQueens(int board[N][N], int col)
                 SOLUTION_EXISTS = true;
                 return true;
         }
-        #pragma omp parallel for
         for (int i = 0; i < N; i++)
         {
             if (can_be_placed(board, i, col))
             {
-
-                board[i][col] = 1;
-                SOLUTION_EXISTS = solve_NQueens(board, col + 1) || SOLUTION_EXISTS;
+                #pragma omp task shared(SOLUTION_EXISTS)
+                {
+                    board[i][col] = 1;
+                    SOLUTION_EXISTS = solve_NQueens(board, col + 1) || SOLUTION_EXISTS;
+                }
                 board[i][col] = 0;
             }
         }
