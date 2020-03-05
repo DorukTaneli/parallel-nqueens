@@ -6,12 +6,12 @@
 #
 # -= Resources =-
 #
-#SBATCH --job-name=game-of-life-jobs
+#SBATCH --job-name=nqueens-job
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=16
 #SBATCH --partition=short
 #SBATCH --time=00:30:00
-#SBATCH --output=game-of-life.out
+#SBATCH --output=nqueens.out
 
 ################################################################################
 ##################### !!! DO NOT EDIT ABOVE THIS LINE !!! ######################
