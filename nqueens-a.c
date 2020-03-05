@@ -43,7 +43,7 @@ void print_solution(int board[N][N])
     //         printf(" %d ", board[i][j]);
     //     printf("\n");
     // }
-    printf("\n");
+    // printf("\n");
 }
 
 bool solve_NQueens(int board[N][N], int col)
