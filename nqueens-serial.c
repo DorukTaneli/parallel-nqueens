@@ -37,7 +37,7 @@ bool can_be_placed(int board[N][N], int row, int col)
 void print_solution(int board[N][N]) 
 { 
     static int k = 1; 
-    printf("Solution #%d-\n",k++); 
+    // printf("Solution #%d-\n",k++); 
     // for (int i = 0; i < N; i++) 
     // { 
     //     for (int j = 0; j < N; j++) 
