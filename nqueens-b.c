@@ -4,7 +4,7 @@
 #include <string.h>
 #include <omp.h>
 
-#define N 12
+#define N 14
 #define MAX_LEVELS 20
 bool SOLUTION_EXISTS = false;
 
