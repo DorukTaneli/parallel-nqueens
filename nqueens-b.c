@@ -4,7 +4,7 @@
 #include <string.h>
 #include <omp.h>
 
-#define N 12
+#define N 14
 #define MAX_LEVELS 20
 bool SOLUTION_EXISTS = false;
 
@@ -44,7 +44,7 @@ void print_solution(int board[N][N])
     //         printf(" %d ", board[i][j]);
     //     printf("\n");
     // }
-    printf("\n");
+    // printf("\n");
 }
 
 bool solve_NQueens(int board[N][N], int col)
