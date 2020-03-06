@@ -78,10 +78,10 @@ int main()
     double time1 = omp_get_wtime();
     #pragma omp parallel
     {
-        #pragma omp single
-        {
+//        #pragma omp single
+//        {
             solve_NQueens(board, 0);
-        }
+//        }
     }
     if (SOLUTION_EXISTS == false)
     {
