@@ -59,7 +59,7 @@ bool solve_NQueens(int board[N][N], int col)
         {
             if (can_be_placed(board, i, col))
             {
-#pragma omp task shared(SOLUTION_EXISTS)
+                #pragma omp task shared(SOLUTION_EXISTS)
                 {
                     board[i][col] = 1;
                     SOLUTION_EXISTS = solve_NQueens(board, col + 1) || SOLUTION_EXISTS;
