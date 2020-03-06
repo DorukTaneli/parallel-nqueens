@@ -36,14 +36,14 @@ bool can_be_placed(int board[N][N], int row, int col)
 void print_solution(int board[N][N])
 {
     static int k = 1;
-    // printf("Solution #%d-\n", k++);
-    // for (int i = 0; i < N; i++)
-    // {
-    //     for (int j = 0; j < N; j++)
-    //         printf(" %d ", board[i][j]);
-    //     printf("\n");
-    // }
-    // printf("\n");
+    printf("Solution #%d-\n", k++);
+    for (int i = 0; i < N; i++)
+    {
+        for (int j = 0; j < N; j++)
+            printf(" %d ", board[i][j]);
+        printf("\n");
+    }
+    printf("\n");
 }
 
 bool solve_NQueens(int board[N][N], int col)
@@ -51,18 +51,24 @@ bool solve_NQueens(int board[N][N], int col)
     {
         if (col == N)
         {
-                print_solution(board);
-                SOLUTION_EXISTS = true;
-                return true;
+            //print_solution(board);
+            SOLUTION_EXISTS = true;
+            return true;
         }
         for (int i = 0; i < N; i++)
         {
             if (can_be_placed(board, i, col))
             {
-                #pragma omp task shared(SOLUTION_EXISTS)
+                #pragma omp parallel
                 {
-                    board[i][col] = 1;
-                    SOLUTION_EXISTS = solve_NQueens(board, col + 1) || SOLUTION_EXISTS;
+                    #pragma omp single
+                    {
+                        #pragma omp task shared(SOLUTION_EXISTS)
+                        {
+                            board[i][col] = 1;
+                            SOLUTION_EXISTS = solve_NQueens(board, col + 1) || SOLUTION_EXISTS;
+                        }
+                    }
                 }
                 board[i][col] = 0;
             }
