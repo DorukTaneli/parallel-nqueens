@@ -59,18 +59,13 @@ bool solve_NQueens(int board[N][N], int col)
         {
             if (can_be_placed(board, i, col))
             {
-                #pragma omp task shared(SOLUTION_EXISTS, board)
-                {
                     board[i][col] = 1;
-                    bool soln_local = solve_NQueens(board, col + 1);
-
-                    #pragma omp critical
-                    SOLUTION_EXISTS = soln_local || SOLUTION_EXISTS;
-                }
-                board[i][col] = 0;
+                    #pragma omp task shared(SOLUTION_EXISTS)
+                    SOLUTION_EXISTS = solve_NQueens(board, col + 1) || SOLUTION_EXISTS;
+                    #pragma omp taskwait
+                    board[i][col] = 0;
             }
         }
-        #pragma omp taskwait
         return SOLUTION_EXISTS;
     }
 }
@@ -80,7 +75,7 @@ int main()
     int board[N][N];
     memset(board, 0, sizeof(board));
     double time1 = omp_get_wtime();
-#pragma omp parallel
+#pragma omp parallel shared(SOLUTION_EXISTS, board)
     {
 #pragma omp single
         {
