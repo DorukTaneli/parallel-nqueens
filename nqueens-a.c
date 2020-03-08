@@ -70,6 +70,7 @@ bool solve_NQueens(int board[N][N], int col)
                 board[i][col] = 0;
             }
         }
+        #pragma omp taskwait
         return SOLUTION_EXISTS;
     }
 }
