@@ -4,7 +4,7 @@
 #include <string.h>
 #include <omp.h>
 
-#define N 12
+#define N 14
 bool SOLUTION_EXISTS = false;
 
 bool can_be_placed(int board[N][N], int row, int col);
@@ -51,7 +51,7 @@ bool solve_NQueens(int board[N][N], int col)
     {
         if (col == N)
         {
-            print_solution(board);
+            //print_solution(board);
             SOLUTION_EXISTS = true;
             return true;
         }
