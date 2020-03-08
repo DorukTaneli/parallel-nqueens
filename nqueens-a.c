@@ -55,7 +55,7 @@ bool solve_NQueens(int board[N][N], int col)
             SOLUTION_EXISTS = true;
             return true;
         }
-        
+
         for (int i = 0; i < N; i++)
         {
             if (can_be_placed(board, i, col))
